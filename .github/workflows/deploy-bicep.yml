@@ -1,0 +1,29 @@
+name: Deploy Bicep Template to Azure
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Bicep template
+        uses: azure/arm-deploy@v1
+        with:
+          scope: resourceGroup
+          resourceGroupName: 'your-resource-group-name'
+          template: './cleaned-deployment.bicep'
+          parameters: ''
