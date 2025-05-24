@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_bicepdemo01_app_name": {
+            "value": null
+        },
+        "serverfarms_ASP_bicepchapter4_a00d_name": {
+            "value": null
+        },
+        "storageAccounts_samplestrgacct011_name": {
+            "value": null
+        }
+    }
+}

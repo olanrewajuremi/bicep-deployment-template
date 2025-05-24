@@ -1,0 +1,27 @@
+# Check the chapter-1 scripts for Login into Azure
+
+# List all RG names
+az group list -o table
+
+# Create the initial chapter-4 resource group
+az group create -l eastus -g 'bicep-chapter4'
+
+# Run decompile on bicep-storage-starter.json file
+az bicep decompile -f .\Chapter-4\bicep-storage-starter.json
+
+# Create RG for 'bicep-chapter4' resources
+az group create -l eastus -g 'bicep-chapter4'
+
+# Deploy the storage into a RG 'cloud-shell-storage-eastus'
+az deployment group create -g 'cloud-shell-storage-eastus' -f .\Chapter-4\tmp\samplestg.json
+
+# Note: Remove unused declarations like queueservices, and "protocolSettings": {} in fileservices.
+
+# Deploy initial chapter-4 environment of three resources
+az deployment group create -g 'bicep-chapter4' -f .\Chapter-4\tmp\resource-group-E.json
+
+# Clean-up resources without confirmation prompt
+az group delete --name 'bicep-chapter4' --yes
+
+# Deployment with five resources
+az deployment group create -g 'bicep-chapter4' -f .\Chapter-4\bicepdemoapp-refactored.bicep 
