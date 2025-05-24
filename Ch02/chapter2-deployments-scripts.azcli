@@ -1,0 +1,27 @@
+# Check the chapter-1 scripts for Login into Azure
+
+# Login to Azure
+az login --use-device-code
+az account show --query name
+
+# Create the chapter resource group
+az group create -l eastus -g 'bicep-chapter2'
+
+# Deploy the resource group and App-Service bicep code
+az deployment group create -g 'bicep-chapter2' -f .\Ch02\simplebicepstorage.bicep -c
+az storage account list --query [].name -o table
+
+# Clean-up resources, without confirmation prompt
+az group delete --name 'rg-chapter2' --yes
+
+# Deploy the simplebicepstorage.bicep file to a 'bicep-chapter2' resource group
+az deployment group create -g 'bicep-chapter2' -f .\Chapter-2\simplebicepstorage.bicep -c
+
+# List all your storage accounts
+az storage account list --query [].name -o table
+
+# Deploy storage-with-variables.bicep file with variables and outputs to a RG
+az deployment group create -g 'bicep-chapter2' -f .\Chapter-2\storage-with-variables.bicep
+
+# Clean-up resources without confirmation prompt
+az group delete --name 'bicep-chapter2' --yes
